@@ -24,7 +24,8 @@ export default {
   },
   methods:{
     getIndex(index) {
-      this.countIndex = index
+      this.countIndex = index;
+      this.$emit('tabClick',index)
     }
   }
 }

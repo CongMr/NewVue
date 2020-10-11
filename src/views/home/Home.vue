@@ -4,151 +4,23 @@
     <home-swiper-item :banners="banners"></home-swiper-item>
     <home-recommend-view :recommends="recommends"></home-recommend-view>
     <home-feature-view></home-feature-view>
-    <tab-control class="tab-control" :titles="['流行','新款','精选']"></tab-control>
-
-    <ul>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li><li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li><li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li><li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li><li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li><li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li><li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li><li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li><li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li><li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li><li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li><li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li><li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li><li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li><li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-      <li>是是是</li>
-
-
-    </ul>
+    <tab-control class="tab-control" :titles="['流行','新款','精选']"  @tabClick="tabClick"></tab-control>
+    <goods-list :goods="showsgoods"></goods-list>
   </div>
 </template>
 
 <script>
 import NavBar from "@/components/common/navbar/NavBar";
 import TabControl from "@/components/content/tabControl/TabControl";
+import GoodsList from "@/components/content/goods/GoodsList";
 
 import HomeSwiperItem from "@/views/home/Compons/HomeSwiperItem";
 import HomeRecommendView from "@/views/home/Compons/HomeRecommendView";
 import HomeFeatureView from "@/views/home/Compons/HomeFeatureView";
 
 
-import {getHomeMultidata} from "@/network/home";
+
+import { getHomeMultidata, getHomeGoods } from "@/network/home";
 
 export default {
   name: "Home",
@@ -157,20 +29,72 @@ export default {
     HomeSwiperItem,
     HomeRecommendView,
     HomeFeatureView,
-    TabControl
+    TabControl,
+    GoodsList
   },
   data() {
     return{
       banners:[],
-      recommends:[]
+      recommends:[],
+      goods:{
+        'pop': {page: 0,list: []},
+        'new': {page: 0,list: []},
+        'sell': {page: 0,list: []},
+      },
+      currIndex: 'pop'
     }
   },
   created() {
-    getHomeMultidata().then(res => {
-      // console.log(res)
-      this.banners = res.data.data.banner.list;
-      this.recommends = res.data.data.recommend.list;
-    })
+    // 请求多个数据
+    this.getHomeMultidata();
+    //请求商品数据
+    this.getHomeGoods('pop')
+    this.getHomeGoods('new')
+    this.getHomeGoods('sell')
+  },
+  computed:{
+    showsgoods(){
+      return this.goods[this.currIndex].list
+    }
+  },
+  methods:{
+    /**
+     *
+     * 事件监听相关的方法
+     */
+    tabClick(index){
+      switch (index){
+        case 0:
+          this.currIndex = 'pop'
+          break
+        case 1:
+          this.currIndex = 'new'
+          break
+        case 2:
+          this.currIndex = 'sell'
+          break
+      }
+    },
+
+    /**
+     *
+     * 网络请求相关的方法
+     */
+    getHomeMultidata(){
+      getHomeMultidata().then(res =>{
+        // console.log(res)
+        this.banners = res.data.data.banner.list;
+        this.recommends = res.data.data.recommend.list;
+      })
+    },
+    getHomeGoods(type) {
+      const page = this.goods[type].page + 1
+      getHomeGoods(type, page).then(res => {
+        console.log(res)
+        this.goods[type].list.push(...res.data.data.list)
+        this.goods[type].page += 1
+      })
+    }
   }
 }
 </script>
@@ -192,5 +116,7 @@ export default {
 .tab-control{
   position: sticky;
   top: 44px;
+
+  z-index: 9;
 }
 </style>
