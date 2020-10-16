@@ -57,9 +57,11 @@ export default {
       currIndex: 'pop',
       isShowbacktop:false,
       tobOffsetTop: 0,
-      isFlexd:false
+      isFlexd:false,
+      saveY:0
     }
   },
+
   created() {
     // 请求多个数据
     this.getHomeMultidata();
@@ -80,6 +82,17 @@ export default {
     showsgoods(){
       return this.goods[this.currIndex].list
     }
+  },
+  activated() {
+    this.$refs.scroll.scroll.scrollTo(0,this.saveY, 0)
+    // console.log(111)
+    this.$refs.scroll.refresh()
+  },
+  deactivated() {
+    // this.saveY = -1000
+    // console.log(222)
+    this.saveY = this.$refs.scroll.getScrollY();
+    // console.log(this.saveY)
   },
   methods:{
     /**
@@ -145,7 +158,8 @@ export default {
         this.$refs.scroll.finishPullUp()
       })
     }
-  }
+  },
+
 }
 </script>
 
